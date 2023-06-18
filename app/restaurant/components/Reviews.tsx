@@ -1,3 +1,4 @@
+"use client"; //convert to client side app
 const Reviews = () => {
   return (
     <div>

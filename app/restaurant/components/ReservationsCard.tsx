@@ -1,3 +1,4 @@
+"use client"; //convert to client side app
 const ReservationsCard = () => {
   return (
     <div className="w-[27%] relative text-reg">

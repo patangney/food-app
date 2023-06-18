@@ -1,8 +1,6 @@
-const Cards = () => {
+const RestaurantCard = () => {
   return (
-    <div
-      className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer"
-    >
+    <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer">
       <img
         src="https://resizer.otstatic.com/v2/photos/wide-huge/2/31852905.jpg"
         alt=""
@@ -25,4 +23,4 @@ const Cards = () => {
   )
 }
 
-export default Cards
+export default RestaurantCard

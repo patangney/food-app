@@ -1,7 +1,7 @@
 
 import Navbar from '@/app/components/navbar/Navbar'
 import Header from '@/app/components/header/Header'
-import Cards from '@/app/components/Card/Cards'
+import RestaurantCard from '@/app/components/RestaurantCard/RestaurantCard'
 
 export default function Home() {
 
@@ -11,7 +11,7 @@ export default function Home() {
         <Navbar />
         <Header />
         <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
-          <Cards />
+          <RestaurantCard />
         </div>
       </div>
     </main>

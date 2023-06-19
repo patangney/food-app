@@ -2,6 +2,11 @@
 import Header from '@/app/components/header/Header'
 import RestaurantCard from '@/app/components/RestaurantCard/RestaurantCard'
 
+export const metadata = {
+  title: 'Food App',
+  description: 'Food App'  
+}
+
 export default function Home() {
 
   return (

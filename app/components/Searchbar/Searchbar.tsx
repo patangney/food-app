@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 const Searchbar = () => {
     const router = useRouter(); //use router
-  const [location, setLocation] = useState(''); //set location to empty string
+  const [location, setLocation] = useState<string>(''); //set location to empty string
   return (
     <div className="text-left text-lg py-3 m-auto flex justify-center" >
       <input
@@ -11,7 +11,7 @@ const Searchbar = () => {
         type="text"
         placeholder="State, city or town"
         value={location}
-        onChange={(e) => setLocation(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLocation(e.target.value)}
       />
       <button className="rounded bg-red-600 px-9 py-2 text-white" onClick={() => {
         if (location) {

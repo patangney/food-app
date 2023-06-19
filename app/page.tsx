@@ -16,7 +16,7 @@ export interface RestaurantCardType {
   cuisine: Cuisine,
   location: Location,
   price: PRICE,
-  slug: string | null,
+  slug: string,
 }
 
 const prisma = new PrismaClient() 

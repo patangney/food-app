@@ -18,7 +18,7 @@ model Restaurant {
   description String
   open_time  String
   close_time String
-  slug      String? @unique // @unique clauses define a unique constraint
+  slug      String @unique // @unique clauses define a unique constraint
   price     PRICE
   items     Item[] // @relation links fields to other models (foreign keys) one to many
   location_id Int

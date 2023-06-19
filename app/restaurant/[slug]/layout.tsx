@@ -1,12 +1,18 @@
 import Header from '@/app/components/Header'
+import { useParams } from 'next/navigation';
 
 const RestaurantLayout = (
-  { children }: { children: React.ReactNode }
+  { children, 
+    params 
+  }: {
+    children: React.ReactNode;
+    params: {slug: string}
+  }
 ) => {
   return (
     //generate layout for restaurant page
     <>
-      <Header />
+      <Header name={params.slug} />
       <div className="flex m-auto w-2/3 justify-between items-start 0 -mt-11">
         {children}
       </div>

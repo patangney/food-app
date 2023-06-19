@@ -1,6 +1,7 @@
 import Searchbar from '@/app/components/Searchbar'
 
 const Header = ({ name }: { name: string }) => {
+  
   const renderTitle = () => {
     const titleArray = name.split('-')
     titleArray[titleArray.length - 1] = `(${titleArray[titleArray.length - 1]})` // add parentheses to the last word

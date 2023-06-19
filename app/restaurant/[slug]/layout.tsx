@@ -1,5 +1,4 @@
 import Header from '@/app/components/Header'
-import { useParams } from 'next/navigation';
 
 const RestaurantLayout = (
   { children, 

@@ -1,4 +1,4 @@
-import Searchbar from '@/app/components/Searchbar/Searchbar'
+import Searchbar from '@/app/components/Searchbar'
 const Header = () => {
   return (
     <div className="bg-gradient-to-r to-[#5f6984] from-[#0f1f47] p-2">

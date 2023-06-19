@@ -1,8 +1,9 @@
 "use client"; //convert to client side app
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+
 const Searchbar = () => {
-    const router = useRouter(); //use router
+  const router = useRouter(); //use router
   const [location, setLocation] = useState<string>(''); //set location to empty string
   return (
     <div className="text-left text-lg py-3 m-auto flex justify-center" >
@@ -14,10 +15,11 @@ const Searchbar = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLocation(e.target.value)}
       />
       <button className="rounded bg-red-600 px-9 py-2 text-white" onClick={() => {
-        if (location) {
-          router.push(`/search?location=${location}`)
+        if (location === '') {
+          alert('Please enter a location')
         } else {
-          router.push('/search')
+          router.push(`/search?city=${location}`)
+          setLocation('')
         }
       }}>
         Let's go

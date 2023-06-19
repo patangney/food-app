@@ -1,7 +1,10 @@
-import React from 'react'
+
+import { PrismaClient, Cuisine, Location, PRICE } from '@prisma/client'
 import Header from '@/app/search/components/Header'
 import Sidebar from '@/app/search/components/Sidebar'
 import RestaurantCard from '@/app/search/components/RestaurantCard'
+
+
 
 export const metadata = {
   title: 'Search for restaurants',
@@ -9,14 +12,49 @@ export const metadata = {
   
 }
 
-const Search = () => {
+const prisma = new PrismaClient()
+
+const fetchRestaurantsByCity = (city: string | undefined) => {
+
+  const select = {
+    id: true,
+    name: true,
+    main_image: true,
+    price: true,
+    cuisine: true,
+    location: true,
+    slug: true,
+  }
+
+  if (!city) return prisma.restaurant.findMany({ select});
+  return prisma.restaurant.findMany({
+    where: {
+      location: {
+        name: {
+          equals: city.toLowerCase()
+        }
+      }
+    },
+    select
+  });
+}
+
+const Search = async ({ searchParams }: { searchParams: { city: string }} ) => {
+  const restaurants = await fetchRestaurantsByCity(searchParams.city)
   return (
     <>
       <Header />
       <div className="flex py-4 m-auto w-2/3 justify-between items-start">
         <Sidebar />
         <div className="w-5/6">
-          <RestaurantCard />
+          {restaurants.length ? (
+            <>
+              {restaurants.map((restaurant) => (
+                <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+              ))}
+            </>
+          ) : searchParams.city ? <h1 className="text-2xl text-center">No restaurants found in {searchParams.city}</h1> : <h1 className="text-2xl text-center">No restaurants found in that area</h1>}
+          
         </div>
       </div>
     </>

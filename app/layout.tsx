@@ -11,8 +11,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-   
+    <html lang="en">   
       <body className={inter.className}>
         <main className="bg-gray-100 min-h-screen w-screen">
           <div className="max-w-screen-2xl m-auto bg-white">
@@ -21,7 +20,6 @@ export default function RootLayout({
           </div>
         </main>
       </body>
-
     </html>
   )
 }

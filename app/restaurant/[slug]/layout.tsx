@@ -1,4 +1,4 @@
-import Header from '@/app/components/header/Header'
+import Header from '@/app/components/Header'
 
 const RestaurantLayout = (
   { children }: { children: React.ReactNode }

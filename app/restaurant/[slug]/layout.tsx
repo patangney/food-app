@@ -4,6 +4,7 @@ const RestaurantLayout = (
   { children }: { children: React.ReactNode }
 ) => {
   return (
+    //generate layout for restaurant page
     <>
       <Header />
       <div className="flex m-auto w-2/3 justify-between items-start 0 -mt-11">

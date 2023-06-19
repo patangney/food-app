@@ -1,4 +1,4 @@
-import Searchbar from '@/app/components/Searchbar/Searchbar'
+import Searchbar from '@/app/components/Searchbar'
 
 /* eslint-disable react/no-unescaped-entities */
 const Header = () => {

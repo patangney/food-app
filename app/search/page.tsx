@@ -1,5 +1,5 @@
 
-import { PrismaClient, Cuisine, Location, PRICE } from '@prisma/client'
+import { PrismaClient} from '@prisma/client'
 import Header from '@/app/search/components/Header'
 import Sidebar from '@/app/search/components/Sidebar'
 import RestaurantCard from '@/app/search/components/RestaurantCard'
@@ -9,7 +9,7 @@ import RestaurantCard from '@/app/search/components/RestaurantCard'
 export const metadata = {
   title: 'Search for restaurants',
   description: 'Search for restaurants',
-  
+
 }
 
 const prisma = new PrismaClient()
@@ -26,7 +26,7 @@ const fetchRestaurantsByCity = (city: string | undefined) => {
     slug: true,
   }
 
-  if (!city) return prisma.restaurant.findMany({ select});
+  if (!city) return prisma.restaurant.findMany({ select });
   return prisma.restaurant.findMany({
     where: {
       location: {
@@ -39,13 +39,23 @@ const fetchRestaurantsByCity = (city: string | undefined) => {
   });
 }
 
-const Search = async ({ searchParams }: { searchParams: { city: string }} ) => {
+const fetchLocations = async () => {
+  return prisma.location.findMany({})
+}
+
+const fetchCuisines = async () => {
+  return prisma.cuisine.findMany({})
+}
+
+const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
   const restaurants = await fetchRestaurantsByCity(searchParams.city)
+  const location = await fetchLocations()
+  const cuisine = await fetchCuisines()
   return (
     <>
       <Header />
       <div className="flex py-4 m-auto w-2/3 justify-between items-start">
-        <Sidebar />
+        <Sidebar locations={location} cuisines={cuisine}/>
         <div className="w-5/6">
           {restaurants.length ? (
             <>
@@ -54,7 +64,7 @@ const Search = async ({ searchParams }: { searchParams: { city: string }} ) => {
               ))}
             </>
           ) : searchParams.city ? <h1 className="text-2xl text-center">No restaurants found in {searchParams.city}</h1> : <h1 className="text-2xl text-center">No restaurants found in that area</h1>}
-          
+
         </div>
       </div>
     </>

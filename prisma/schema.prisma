@@ -11,37 +11,39 @@ datasource db {
 }
 
 model Restaurant {
-  id        Int   @id @default(autoincrement()) // @id marks a field as the model's primary key
-  name      String
-  main_image String
-  images    String[]
+  id          Int      @id @default(autoincrement()) // @id marks a field as the model's primary key
+  name        String
+  main_image  String
+  images      String[]
   description String
-  open_time  String
-  close_time String
-  slug      String @unique // @unique clauses define a unique constraint
-  price     PRICE
-  items     Item[] // @relation links fields to other models (foreign keys) one to many
+  open_time   String
+  close_time  String
+  slug        String   @unique // @unique clauses define a unique constraint
+  price       PRICE
+  items       Item[] // @relation links fields to other models (foreign keys) one to many
   location_id Int
-  location  Location @relation(fields: [location_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
-  cuisine_id Int
-  cuisine  Cuisine @relation(fields: [cuisine_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  location    Location @relation(fields: [location_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
+  cuisine_id  Int
+  cuisine     Cuisine  @relation(fields: [cuisine_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
+  reviews     Review[] // @relation links fields to other models (foreign keys) one to many
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 }
 
 model Location {
-  id        Int   @id @default(autoincrement()) // @id marks a field as the model's primary key
-  name      String
+  id          Int          @id @default(autoincrement()) // @id marks a field as the model's primary key
+  name        String
   restaurants Restaurant[] // @relation links fields to other models (foreign keys) one to many
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
 }
+
 model Cuisine {
-  id        Int   @id @default(autoincrement()) // @id marks a field as the model's primary key
-  name      String
+  id          Int          @id @default(autoincrement()) // @id marks a field as the model's primary key
+  name        String
   restaurants Restaurant[] // @relation links fields to other models (foreign keys) one to many
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
 }
 
 enum PRICE {
@@ -52,15 +54,41 @@ enum PRICE {
 }
 
 model Item {
-  id          Int      @id @default(autoincrement())
-  name        String
-  price       String
-  description String
+  id            Int        @id @default(autoincrement())
+  name          String
+  price         String
+  description   String
   restaurant_id Int
-  restaurant  Restaurant @relation(fields: [restaurant_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  first_name String
+  last_name  String
+  city       String
+  email      String   @unique
+  password   String
+  phone      String
+  reviews    Review[] // @relation links fields to other models (foreign keys) one to many | user can have many reviews
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+}
 
+model Review {
+  id            Int        @id @default(autoincrement())
+  first_name    String
+  last_name     String
+  text          String
+  rating        Float
+  restaurant_id Int
+  user_id       Int
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
+  user          User      @relation(fields: [user_id], references: [id]) // @relation links fields to other models (foreign keys) one to many
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
 }
 
 // /npx prisma db push 
